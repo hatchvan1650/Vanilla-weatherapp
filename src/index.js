@@ -64,3 +64,20 @@ function search(event) {
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
+
+//current location
+
+function searchLocation(position) {
+  let apiKey = "259444458b41f50b6fbe110f31a12c14";
+  let units = "Imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
+
+  axios.get(apiUrl).then(displayWeather);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+let currentLocationButton = document.querySelector("#cl");
+currentLocationButton.addEventListener("click", getCurrentLocation);
