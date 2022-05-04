@@ -1,2 +1,2 @@
-# Vanilla-weatherapp
+# week-6HW
 Created with CodeSandbox

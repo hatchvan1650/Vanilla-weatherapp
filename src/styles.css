@@ -1,0 +1,37 @@
+h1 {
+  margin: 0 auto;
+  padding-top: 30px;
+  font-size: 45px;
+  text-align: center;
+}
+h2 {
+  margin: 0 auto;
+  padding-top: 10px;
+  font-size: 10px;
+  text-align: center;
+}
+button {
+  background: #fafafa;
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+.container-one {
+  margin-bottom: 60px;
+  font-size: 25px;
+  padding-top: 35px;
+  text-align: center;
+}
+.container-two {
+  text-align: left;
+  text-align: center;
+}
+
+.container-three {
+  background-color: rgb(230, 227, 219);
+  text-align: center;
+}
+
+.row {
+  font-size: 20px;
+  text-align: center;
+}
