@@ -40,9 +40,13 @@ function displayWeather(response) {
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
 
- let iconElement = document.querySelector("#icon");
- iconElement.innerHTML = 
-
+  let iconEle = document.querySelector("#icon");
+  let icon = response.data.weather[0].icon;
+  iconEle.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${icon}@2x.png`
+  );
+  iconEle.setAttribute("alt", response.data.weather[0].description);
 }
 
 //search
