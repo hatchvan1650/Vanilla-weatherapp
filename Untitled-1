@@ -1,0 +1,22 @@
+function displayFTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temp");
+  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  tempElement.innerHTML = `${Math.round(fahrenheitTemp)}°F`;
+}
+
+function displayCTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temp");
+  tempElement.innerHTML = `${Math.round(celsiusTemp)}°C`
+}
+
+let fLink = document.querySelector("#fdegree");
+fLink.addEventListener("click", displayFTemp);
+
+let cLink = document.querySelector("#cdegree");
+cLink.addEventListener("click", displayCTemp);
+function searchCity(city) {
+  let apiKey = "259444458b41f50b6fbe110f31a12c14";
+  let units = "metric";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;

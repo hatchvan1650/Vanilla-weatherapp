@@ -28,13 +28,20 @@ let month = months[now.getMonth()];
 
 h2.innerHTML = `${day} ${month} ${date}, ${hours}:${minutes}, ${year}`;
 
+//weather display
 function displayWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
+  document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
   );
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = response.data.main.humidity;
+
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = Math.round(response.data.wind.speed);
 }
 
+//search
 function search(event) {
   event.preventDefault();
   let cityElement = document.querySelector("#city");
