@@ -32,6 +32,9 @@ h2.innerHTML = `${day} ${month} ${date}, ${hours}:${minutes}, ${year}`;
 function displayWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#current-temp").innerHTML = Math.round(celsiusTemp);
+  let description = document.querySelector("#WD");
+  description.innerHTML = response.data.weather.description;
+
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
 
@@ -82,7 +85,7 @@ function getCurrentLocation(event) {
 let currentLocationButton = document.querySelector("#cl");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-//temp conversion
+//Ftemp conversion
 function showFahrenhightTemp(event) {
   event.preventDefault();
   let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
@@ -94,3 +97,12 @@ let fahrenheitLink = document.querySelector("#fdegree");
 fahrenheitLink.addEventListener("click", showFahrenhightTemp);
 
 let celsiusTemp = null;
+
+//Ctemp conversion
+function showCelsiusTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temp");
+  tempElement.innerHTML = Math.round(celsiusTemp);
+}
+let celsiusLink = document.querySelector("#cdegree");
+celsiusLink.addEventListener("click", showCelsiusTemp);
