@@ -31,9 +31,7 @@ h2.innerHTML = `${day} ${month} ${date}, ${hours}:${minutes}, ${year}`;
 //weather display
 function displayWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#current-temp").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  document.querySelector("#current-temp").innerHTML = Math.round(celsiusTemp);
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
 
@@ -47,6 +45,8 @@ function displayWeather(response) {
     `http://openweathermap.org/img/wn/${icon}@2x.png`
   );
   iconEle.setAttribute("alt", response.data.weather[0].description);
+
+  celsiusTemp = response.data.main.temp;
 }
 
 //search
@@ -57,7 +57,7 @@ function search(event) {
   cityElement.innerHTML = cityInput.value;
   let apiKey = "259444458b41f50b6fbe110f31a12c14";
   let city = document.querySelector("#city-input").value;
-  let units = "Imperial";
+  let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayWeather);
 }
@@ -69,7 +69,7 @@ searchForm.addEventListener("submit", search);
 
 function searchLocation(position) {
   let apiKey = "259444458b41f50b6fbe110f31a12c14";
-  let units = "Imperial";
+  let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
 
   axios.get(apiUrl).then(displayWeather);
@@ -81,3 +81,16 @@ function getCurrentLocation(event) {
 }
 let currentLocationButton = document.querySelector("#cl");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+
+//temp conversion
+function showFahrenhightTemp(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  let tempElement = document.querySelector("#current-temp");
+  tempElement.innerHTML = Math.round(fahrenheitTemp);
+}
+
+let fahrenheitLink = document.querySelector("#fdegree");
+fahrenheitLink.addEventListener("click", showFahrenhightTemp);
+
+let celsiusTemp = null;
