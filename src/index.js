@@ -31,9 +31,10 @@ h2.innerHTML = `${day} ${month} ${date}, ${hours}:${minutes}, ${year}`;
 //weather display
 function displayWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
+  celsiusTemp = response.data.main.temp;
   document.querySelector("#current-temp").innerHTML = Math.round(celsiusTemp);
   let description = document.querySelector("#WD");
-  description.innerHTML = response.data.weather.description;
+  description.innerHTML = response.data.weather[0].description;
 
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
@@ -48,8 +49,6 @@ function displayWeather(response) {
     `http://openweathermap.org/img/wn/${icon}@2x.png`
   );
   iconEle.setAttribute("alt", response.data.weather[0].description);
-
-  celsiusTemp = response.data.main.temp;
 }
 
 //search
@@ -86,8 +85,10 @@ let currentLocationButton = document.querySelector("#cl");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 //Ftemp conversion
+
 function showFahrenhightTemp(event) {
   event.preventDefault();
+
   let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
   let tempElement = document.querySelector("#current-temp");
   tempElement.innerHTML = Math.round(fahrenheitTemp);
@@ -95,14 +96,15 @@ function showFahrenhightTemp(event) {
 
 let fahrenheitLink = document.querySelector("#fdegree");
 fahrenheitLink.addEventListener("click", showFahrenhightTemp);
-
 let celsiusTemp = null;
-
 //Ctemp conversion
+
 function showCelsiusTemp(event) {
   event.preventDefault();
+
   let tempElement = document.querySelector("#current-temp");
   tempElement.innerHTML = Math.round(celsiusTemp);
 }
+
 let celsiusLink = document.querySelector("#cdegree");
 celsiusLink.addEventListener("click", showCelsiusTemp);
